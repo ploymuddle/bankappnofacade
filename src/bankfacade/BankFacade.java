@@ -21,36 +21,49 @@ public class BankFacade {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       //Customer1
-       ArrayList<AccountIf> cust1Accounts = new ArrayList();
-       AccountIf acc1 = new BankAccount(1001);
-       cust1Accounts.add(acc1);
-       acc1 = new BankAccount(1002);
-       cust1Accounts.add(acc1);
-       CustomerIf cust1 = new BankCustomer("Max", cust1Accounts);
-       //Customer2
-       ArrayList<AccountIf> cust2Accounts = new ArrayList();
-       AccountIf acc2 = new BankAccount(2001);
-       cust2Accounts.add(acc2);
-       acc2 = new BankAccount(2002);
-       cust2Accounts.add(acc2);
-       CustomerIf cust2 = new BankCustomer("Min", cust2Accounts);
+        
+       MyBankFacade obj = new MyBankFacade();
+       AccountIf acc = null;
        
+       CustomerIf cust = obj.getBankCustomer("Max");
        System.out.println("Customer and account information");
-       System.out.println("Name = " + cust1.getCustomerName());
-       System.out.println("Has " + cust1.getNumAccounts() + " accounts");
+       System.out.println("Name = " + cust.getCustomerName());
+       System.out.println("Has " + cust.getNumAccounts() + " accounts");
        
+       //---------Account Max-------//
     //getBankAccount
-       MyBankFacade.getBankAccount(cust1,1001);
-       MyBankFacade.getBankAccount(cust1,1002);
+       acc = obj.getBankAccount(cust,1001);
+       System.out.println("Account Number: " + acc.getAccountNumber() + " has " + acc.getBalance());
+       acc = obj.getBankAccount(cust,1002);
+       System.out.println("Account Number: " + acc.getAccountNumber() + " has " + acc.getBalance());
     //doDeposit
-       MyBankFacade.doDeposit(1000, cust1, 1002);
-       MyBankFacade.getBankAccount(cust1,1002);
-       MyBankFacade.doDeposit(500, cust1, 1002);
-       MyBankFacade.getBankAccount(cust1,1002);
+       obj.doDeposit(1000, cust, 1002);
+       acc = obj.getBankAccount(cust,1002);
+       System.out.println("Account Number: " + acc.getAccountNumber() + " has " + acc.getBalance());
+       obj.doDeposit(500, cust, 1002);
+       acc =  obj.getBankAccount(cust,1002);
+       System.out.println("Account Number: " + acc.getAccountNumber() + " has " + acc.getBalance());
+       
+//       //---------Account Min-------//
+//    //getBankAccount
+//       acc = obj.getBankAccount(cust,2001);
+//       System.out.println("Account Number: " + acc.getAccountNumber() + " has " + acc.getBalance());
+//       acc = obj.getBankAccount(cust,2002);
+//       System.out.println("Account Number: " + acc.getAccountNumber() + " has " + acc.getBalance());
+//    //doDeposit
+//       obj.doDeposit(1000, cust, 2001);
+//       acc = obj.getBankAccount(cust,2001);
+//       System.out.println("Account Number: " + acc.getAccountNumber() + " has " + acc.getBalance());
+//       obj.doDeposit(500, cust, 2002);
+//       acc =  obj.getBankAccount(cust,2002);
+//       System.out.println("Account Number: " + acc.getAccountNumber() + " has " + acc.getBalance());
        
     //getBankCustomer
-       MyBankFacade.getBankCustomer(cust1);
+       System.out.println("Your Account");
+       ArrayList<AccountIf> accounts = cust.getllAccounts();
+       for(AccountIf account : accounts) {
+           System.out.println("Account number " + account.getAccountNumber() + " has " + account.getBalance());
+       }
     }
     
 }

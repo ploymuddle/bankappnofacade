@@ -16,25 +16,42 @@ import java.util.ArrayList;
  * @author PLOYMUDDLE
  */
 public class MyBankFacade {
-    private static AccountIf acc;
-    
-    public static void doDeposit(double amt, CustomerIf cust, int accNo){
-      
+    ArrayList<CustomerIf> custAccounts = new ArrayList();
+    MyBankFacade() {
+        //Customer1
        ArrayList<AccountIf> cust1Accounts = new ArrayList();
-       acc = cust.getAccount(accNo);
-       acc.deposit(amt);
-       cust1Accounts.add(acc);
-       cust = new BankCustomer(cust.getCustomerName(), cust1Accounts);
-    }
-    public static void getBankAccount(CustomerIf cust, int accNo){
-       acc = cust.getAccount(accNo);
-       System.out.println("Account Number: " + acc.getAccountNumber() + " has " + acc.getBalance());
+       AccountIf acc1 = new BankAccount(1001);
+       cust1Accounts.add(acc1);
+       acc1 = new BankAccount(1002);
+       cust1Accounts.add(acc1);
+       CustomerIf cust1 = new BankCustomer("Max", cust1Accounts);
+       custAccounts.add(cust1);
+       
+       //Customer2
+       ArrayList<AccountIf> cust2Accounts = new ArrayList();
+       AccountIf acc2 = new BankAccount(2001);
+       cust2Accounts.add(acc2);
+       acc2 = new BankAccount(2002);
+       cust2Accounts.add(acc2);
+       CustomerIf cust2 = new BankCustomer("Min", cust2Accounts);
+       custAccounts.add(cust2);
     }
     
-    public static void getBankCustomer(CustomerIf cust) {
-       ArrayList<AccountIf> accounts = cust.getllAccounts();
-       for(AccountIf account : accounts) {
-           System.out.println("Account number " + account.getAccountNumber() + " has " + account.getBalance());
-       }
+    public void doDeposit(double amt, CustomerIf cust, int accNo){
+      
+       cust.getAccount(accNo).deposit(amt);
+    }
+    public AccountIf getBankAccount(CustomerIf cust, int accNo){
+        return cust.getAccount(accNo);
+    }
+    
+    public CustomerIf getBankCustomer(String custName) {
+  
+        for(CustomerIf cust : custAccounts){
+            if(cust.getCustomerName().equals(custName)){
+               return cust;
+            }
+        }
+        return null;
     }
 }
