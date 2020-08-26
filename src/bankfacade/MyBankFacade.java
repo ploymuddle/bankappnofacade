@@ -27,15 +27,14 @@ public class MyBankFacade {
        cust = new BankCustomer(cust.getCustomerName(), cust1Accounts);
     }
     public static void getBankAccount(CustomerIf cust, int accNo){
-//       acc = cust.getAccount(12346);
-//       System.out.println("Account Number: " + acc.getAccountNumber() + " has " + acc.getBalance());
-//       ArrayList<AccountIf> accounts = cust.getllAccounts();
-//       for(AccountIf account : accounts) {
-//           System.out.println("Account number " + account.getAccountNumber() + " has " + account.getBalance());
-//       }
+       acc = cust.getAccount(accNo);
+       System.out.println("Account Number: " + acc.getAccountNumber() + " has " + acc.getBalance());
     }
-    public ArrayList<AccountIf> getBanCustomer(String custName) {
-        
-        return null;
+    
+    public static void getBankCustomer(CustomerIf cust) {
+       ArrayList<AccountIf> accounts = cust.getllAccounts();
+       for(AccountIf account : accounts) {
+           System.out.println("Account number " + account.getAccountNumber() + " has " + account.getBalance());
+       }
     }
 }
